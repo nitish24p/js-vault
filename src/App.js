@@ -16,8 +16,11 @@ class App extends Component {
         <Header />
         <main className={styles.app}>
           <Sidebar>
-            <Sidebar.MenuItem link="/">Home</Sidebar.MenuItem>
-            <Sidebar.MenuItem link="/array-map">Array.map</Sidebar.MenuItem>
+            <Sidebar.MenuItem link="/array-map">Array.filter</Sidebar.MenuItem>
+            <Sidebar.MenuItem link="/array-list">Array.map</Sidebar.MenuItem>
+            <Sidebar.MenuItem link="/array-reduce">
+              Array.reduce
+            </Sidebar.MenuItem>
           </Sidebar>
           {/* <Router></Router> */}
           <Routes />
