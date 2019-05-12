@@ -1,34 +1,30 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import styles from './app.module.css';
 
-import Content from './content/test.mdx';
-import Provider from './provider';
+//import Content from './content/test.mdx';
+import Provider from './components/provider';
+
+import Header from './components/header';
+import Sidebar from './components/sidebar';
+import Routes from './routes';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Provider>
-          <Content />
-        </Provider>
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-
-
-            Learn React
-          </a>
-
-        </header>
+      <div>
+        <Header />
+        <main className={styles.app}>
+          <Sidebar>
+            <Sidebar.MenuItem link="/">Home</Sidebar.MenuItem>
+            <Sidebar.MenuItem link="/array-map">Array.map</Sidebar.MenuItem>
+          </Sidebar>
+          {/* <Router></Router> */}
+          <Routes />
+          {/* <Provider>
+            <Content />
+          </Provider> */}
+        </main>
       </div>
     );
   }

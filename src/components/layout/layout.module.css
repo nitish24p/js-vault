@@ -1,0 +1,7 @@
+.content {
+  margin-left: 240px;
+  padding-left: 20px;
+  padding-right: 60px;
+  min-height: 100vh;
+  display: flex;
+}

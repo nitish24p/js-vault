@@ -1,0 +1,9 @@
+:root {
+  --primary: rgb(49, 85, 220);
+  --grey-text: green 
+}
+
+.app {
+  min-width: 1024px;
+  padding-top: 70px;  
+}

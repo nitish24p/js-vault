@@ -1,0 +1,73 @@
+
+.header {
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.06), 0 4px 5px 0 rgba(0,0,0,.06), 0 1px 9px 3px rgba(0,0,0,.08);
+  background: #fff;
+  border-color: rgba(0,0,0,.14);
+  color: rgba(0,0,0,.54);
+  fill: rgba(0,0,0,.54);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  transition: box-shadow .2s ease-in-out;
+  height: 70px;
+  z-index: 1;
+  position: fixed;
+  width: 100%;
+}
+
+.headerCorner {
+  width: 60px;
+  text-align: center;
+}
+
+.headerLockup {
+  position: relative;
+  top: 15px;
+  z-index: 1;
+  transform: translateX(-20px);
+  display: flex;
+  align-items: center;
+
+  
+}
+
+.lockUpLogo {
+  height: 24px;
+}
+
+
+.headerNav {
+  position: relative;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  text-align: right;
+  display: flex;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.headerNav>ul {
+  display: inline-flex;
+  flex-direction: row;
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  padding: 0px 20px 0px 0px;
+}
+
+.headerNav li {
+  font-size: 14px;
+  margin-left: 32px;
+  text-transform: uppercase;
+  color:#FF527B;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-left: 20px;
+}
