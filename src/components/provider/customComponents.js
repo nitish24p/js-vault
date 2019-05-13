@@ -27,4 +27,18 @@ const table = {
   width: '100%'
 };
 
-export { blockquote, anchor, paragraph };
+const markdown = {
+  display: 'block',
+  overflow: 'auto',
+  width: '100%'
+};
+
+const ol = {
+  lineHeight: '30px'
+};
+
+const ul = {
+  lineHeight: '25px'
+};
+
+export { blockquote, anchor, paragraph, markdown, ul, ol };
