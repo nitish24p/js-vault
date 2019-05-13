@@ -2,6 +2,7 @@ import React from 'react';
 
 import TestMdxComp from './../content/test';
 import ArrayMapDoc from './../content/array-map';
+import generateMarkDown from './../content/generateMarkDown';
 
 const routes = [
   // {
@@ -18,7 +19,9 @@ const routes = [
   {
     path: '/array-filter',
     exact: true,
-    main: TestMdxComp,
+    main: generateMarkDown(() =>
+      import('./../content/array-map/array-map.mdx')
+    ),
     text: 'Implement Array.filter'
   },
   {
