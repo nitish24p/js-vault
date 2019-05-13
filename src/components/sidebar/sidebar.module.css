@@ -1,0 +1,66 @@
+.sidebar {
+  width: 240px;
+  height: 100%;
+  position: fixed;
+  background: #fff;
+}
+
+
+.grey-item {
+  background: white !important;
+  border-bottom: 1px solid #eaeaea;
+  color: #757575 !important;
+}
+
+.navigationListParent {
+  height: 100%;
+}
+
+
+
+.navList {
+  padding-top: 80px;
+  margin: -2px 0 0;
+  padding: 0;
+  position: relative;
+}
+
+.navList li a {
+  background: #fff;
+  color: var(--primary);
+  display: block;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 15px 0 15px 25px;
+  font-size: 16px;
+  outline: none;
+  /* -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease; */
+}
+
+.navList li a:hover {
+  color: #fff;
+  background: var(--primary);;
+}
+
+.active {
+  background: red
+}
+
+@media (max-width: 460px) {
+  .sidebar {
+    width: 240px;
+    height: 100%;
+    position: absolute;
+    left: -240px;
+    background: #fff;
+    transition: transform 0.2s
+  }
+
+  .reveal {
+    transform: translateY(240px)
+  }
+} 
