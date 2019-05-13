@@ -8,6 +8,7 @@ import Provider from './components/provider';
 import Header from './components/header';
 import Sidebar from './components/sidebar';
 import Routes from './routes';
+import routes from './routes/routes';
 
 class App extends Component {
   render() {
@@ -16,11 +17,11 @@ class App extends Component {
         <Header />
         <main className={styles.app}>
           <Sidebar>
-            <Sidebar.MenuItem link="/array-map">Array.filter</Sidebar.MenuItem>
-            <Sidebar.MenuItem link="/array-list">Array.map</Sidebar.MenuItem>
-            <Sidebar.MenuItem link="/array-reduce">
-              Array.reduce
-            </Sidebar.MenuItem>
+            {routes.map((route, index) => (
+              <Sidebar.MenuItem key={index} link={route.path}>
+                {route.text}
+              </Sidebar.MenuItem>
+            ))}
           </Sidebar>
           {/* <Router></Router> */}
           <Routes />
