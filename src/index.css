@@ -16,7 +16,8 @@ code {
 }
 
 .active {
-  //background: red !important;
+  background: #f6f8fa !important;
   font-style: italic;
   font-weight: 600;
+  
 }
