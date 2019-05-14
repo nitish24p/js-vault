@@ -1,0 +1,63 @@
+## Implement Array.reduce
+
+
+[Array.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) 
+
+>The map() method creates a new array with the results of calling a provided function on every element in the calling array.
+
+### Question
+Implement the `Array.map` method
+
+### Thought process Pseudocode
+1. A function which takes a function as an argument
+2. The function argument must be passed the array index, the item and the context
+
+### Solution
+```javascript
+/**
+ * Reduce function is attached to the array prototype
+ * It takes in a callback and passes every item in the array
+ * through the callback, and also a starting value
+ */
+
+/**
+ * The callback gets 3 arguments
+ * the item, the index and the  execution context
+ * 
+ */
+Array.prototype.newReduce = function (callback, startingValue) {
+  // as starting value is an optional param
+  // make a check
+  let accumulator = startingValue || undefined;
+  for (let index = 0; index < this.length; index++) {
+    if (accumulator) {
+      accumulator = callback.call(accumulator, accumulator, this[index], index, this)
+    } else {
+      accumulator = this[index]
+    }
+  }
+
+  return accumulator;
+}
+
+const nums = [1, 2, 3, 4, 5]
+const sum = nums.newReduce((accum, current) => {
+  accum.push(current * 2)
+  return accum
+}, []);
+console.log(sum)
+
+const queryString = "cat=meow&duck=quack&dog=woof";
+
+const queryObject = queryString.split("&").newReduce((accum, current) => {
+  const splitString = current.split("=")
+  accum[splitString[0]] = splitString[1];
+  return accum;
+}, {})
+
+console.log(queryObject);
+
+``` 
+
+### Caveat
+The reason for the if condition is basically, to ensure the item is present in the array, `Array.map` does not alter the index of the items in the resultant array, hence in the  case above there will be 6 entries which will be emtpty

@@ -39,7 +39,7 @@ class Sidebar extends React.PureComponent {
 
   render() {
     return (
-      <div className={styles.sidebar}>
+      <div className={styles.sidebar} id="sidebar">
         <div className={styles.navigationListParent}>
           <ul className={styles.navList}>{this.renderChildren()}</ul>
         </div>
