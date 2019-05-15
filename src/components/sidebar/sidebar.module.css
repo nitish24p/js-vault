@@ -58,10 +58,11 @@
     position: absolute;
     left: -240px;
     background: #fff;
-    transition: transform 0.2s
+    transition: transform 0.2s;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.06), 0 4px 5px 0 rgba(0,0,0,.06), 0 1px 9px 3px rgba(0,0,0,.08);
   }
 
   .reveal {
-    transform: translateY(240px)
+    transform: translateX(240px)
   }
 } 

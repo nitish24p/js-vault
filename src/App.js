@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import styles from './app.module.css';
-
-//import Content from './content/test.mdx';
-import Provider from './components/provider';
-
 import Header from './components/header';
 import Sidebar from './components/sidebar';
-import Routes from './routes';
+import AppRoutes from './routes';
 import routes from './routes/routes';
 
 class App extends Component {
+  state = {
+    isSidebarOpen: false
+  };
+  toggleSidebar = () => {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+      this.setState(({ isSidebarOpen }) => ({ isSidebarOpen: !isSidebarOpen }));
+    }
+  };
   render() {
     return (
       <div>
-        <Header />
+        <Header onToggleSidebar={this.toggleSidebar} />
         <main className={styles.app}>
-          <Sidebar>
+          <Sidebar
+            open={this.state.isSidebarOpen}
+            onLinkClick={this.toggleSidebar}
+          >
             {routes.map((route, index) => (
               <Sidebar.MenuItem
                 key={index}
@@ -27,11 +34,7 @@ class App extends Component {
               </Sidebar.MenuItem>
             ))}
           </Sidebar>
-          {/* <Router></Router> */}
-          <Routes />
-          {/* <Provider>
-            <Content />
-          </Provider> */}
+          <AppRoutes />
         </main>
       </div>
     );
