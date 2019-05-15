@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -70px
+}
+
+.logoContainer img {
+  width: 120px
+}
+
+.logoContainer span {
+  margin-left: 20px;
+  font-size: 80px;
+  color: var(--primary);
+  font-weight: 500
+}
+
+.heading {
+  color: #363A3F;
+}

@@ -7,7 +7,7 @@ const Header = props => (
     <div className={styles.headerCorner} />
     <div className={styles.headerLockup}>
       <img src={logo} width="40" />
-      <span className={styles.title}> JS Vault</span>
+      <span className={styles.title}>Vault</span>
     </div>
   </header>
 );

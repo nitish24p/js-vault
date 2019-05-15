@@ -3,6 +3,7 @@
   height: 100%;
   position: fixed;
   background: #fff;
+  overflow-y: scroll;
 }
 
 
@@ -43,7 +44,7 @@
 
 .navList li a:hover {
   color: #fff;
-  background: var(--primary);;
+  background: var(--primary) !important;
 }
 
 .active {

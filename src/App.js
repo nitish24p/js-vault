@@ -18,7 +18,11 @@ class App extends Component {
         <main className={styles.app}>
           <Sidebar>
             {routes.map((route, index) => (
-              <Sidebar.MenuItem key={index} link={route.path}>
+              <Sidebar.MenuItem
+                key={index}
+                link={route.path}
+                preload={route.preload}
+              >
                 {route.text}
               </Sidebar.MenuItem>
             ))}

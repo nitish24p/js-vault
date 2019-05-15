@@ -10,6 +10,7 @@ const SidebarItem = props => {
         activeClassName={'active'}
         to={props.link}
         onClick={props.onClick}
+        onMouseEnter={() => props.onHoverLink(props.preload)}
       >
         {props.children}
       </NavLink>
@@ -23,17 +24,22 @@ class Sidebar extends React.PureComponent {
     console.log('clicked a link');
   };
 
+  onHoverLink = preload => {
+    preload && typeof preload === 'function' && preload();
+  };
+
   renderChildren = () => {
     return React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
-        onClick: this.onLinkClick
+        onClick: this.onLinkClick,
+        onHoverLink: this.onHoverLink
       });
     });
   };
 
   render() {
     return (
-      <div className={styles.sidebar}>
+      <div className={styles.sidebar} id="sidebar">
         <div className={styles.navigationListParent}>
           <ul className={styles.navList}>{this.renderChildren()}</ul>
         </div>
