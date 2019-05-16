@@ -5,7 +5,7 @@ import logo from './../../assets/logo_v1.png';
 const Header = props => (
   <header className={styles.header}>
     <div className={styles.headerCorner}>
-      <button onClick={props.onToggleSidebar}>
+      <button onClick={props.onToggleSidebar} aria-label="sidebar">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="44px"
@@ -18,7 +18,7 @@ const Header = props => (
       </button>
     </div>
     <div className={styles.headerLockup}>
-      <img src={logo} width="40" />
+      <img src={logo} width="40" alt="logo" />
       <span className={styles.title}>Vault</span>
     </div>
   </header>

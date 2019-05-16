@@ -42,13 +42,13 @@ const routes = [
     preload: import('./../content/array-reduce/array-reduce.mdx')
   },
   {
-    path: '/array-filter',
+    path: '/function-bind',
     exact: true,
     main: generateMarkdown(() =>
-      import('./../content/array-filter/array-filter.mdx')
+      import('./../content/function-bind/function-bind.mdx')
     ),
-    text: 'Implement Array.reduce',
-    preload: () => import('./../content/array-filter/array-filter.mdx')
+    text: 'Implement Function.bind',
+    preload: () => import('./../content/function-bind/function-bind.mdx')
   },
   {
     path: '/array-filter',

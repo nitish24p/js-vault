@@ -7,7 +7,7 @@ const Home = props => {
     <div className={styles.container}>
       <div>
         <div className={styles.logoContainer}>
-          <img src={logo} />
+          <img src={logo} alt="logo" />
           <span>Vault</span>
         </div>
         <h3 className={styles.heading}>
