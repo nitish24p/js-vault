@@ -1,7 +1,3 @@
-import React from 'react';
-
-// import TestMdxComp from './../content/test';
-// import ArrayMapDoc from './../content/array-map';
 import generateMarkdown from './../content/generateLazyMarkdown';
 
 const routes = [
@@ -67,6 +63,15 @@ const routes = [
     ),
     text: 'Implement Async Parallel',
     preload: () => import('./../content/async-parallel/async-parallel.mdx')
+  },
+  {
+    path: '/async-series',
+    exact: true,
+    main: generateMarkdown(() =>
+      import('./../content/async-series/async-series.mdx')
+    ),
+    text: 'Implement Async Series',
+    preload: () => import('./../content/async-series/async-series.mdx')
   }
 
   //====================DELETE JUNK BELOW THIS=====================
