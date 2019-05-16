@@ -1,0 +1,90 @@
+## Implement async.parallel
+
+
+[async.parallel](https://caolan.github.io/async/docs.html#parallel) 
+
+>Run the tasks collection of functions in parallel, without waiting until the previous function has completed. If any of the functions pass an error to its callback, the main callback is immediately called with the value of the error.
+
+
+
+
+
+
+
+### Question
+You have an `asyncFunction` which takes a callback and the result of the `asyncFunction` is passed to the callback,
+create a function `asyncParallel` which takes an array of asyncFunctions and a `resultCallback`. When the asyncActions
+are completed the `resultCallback` must be invoked with the values.
+```text
+asyncFuntion can be of type
+function asyncFunction(callback) {
+  setTimeout(() => {
+    data is got after asyncAction is completed
+    callback(data)
+  })
+}
+
+asyncParallel is of type
+function asyncParallel(tasks, resultCallback) {
+
+}
+
+resultCallback is of type
+function resultCallback(completedResult) {
+  // completed Result
+}
+```
+
+### Thought process Pseudocode
+1. For the sake of simplicity we will create a method `createAsyncAction` which will create asyncActions
+```javascript
+function createAsyncTask() {
+  const value = Math.floor(Math.random() * 10);
+  return function(callback) {
+    setTimeout(() => {
+      callback(value);
+    }, value * 1000);
+  };
+}
+```
+2. As we do not care about the order of the results, we will use [Array.forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)  
+3. The callback passed as an iterator to each asyncAction, must keep track of the taskList array index, and on meeting the length of the array
+invoke the `resultsCallback` with the desired results array.
+4. Again for simplicity the error case is not handled, but can be handled by passing an error parameter in the `resultsCallback`
+
+
+### Solution
+```javascript
+function asyncParallel(taskList, resultsCallback) {
+  const results = [];
+  let tasksCompleted = 0;
+  taskList.forEach(asyncTask => {
+    asyncTask(value => {
+      results.push(value);
+      tasksCompleted++;
+
+      if (tasksCompleted >= taskList.length) {
+        resultsCallback.call(null, results);
+      }
+    });
+  });
+}
+
+const taskList = [
+  createAsyncTask(),
+  createAsyncTask(),
+  createAsyncTask(),
+  createAsyncTask(),
+  createAsyncTask(),
+  createAsyncTask()
+];
+
+asyncParallel(taskList, result => {
+  console.log('got the results', result);
+});
+
+``` 
+
+### Caveat
+As asyncParallel does not wait for the completion of the other asyncActions, the order of the resultCallback results
+may or may not change.

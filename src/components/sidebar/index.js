@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './sidebar.module.css';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const SidebarItem = props => {
   console.log('called');

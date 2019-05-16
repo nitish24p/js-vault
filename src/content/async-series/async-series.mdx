@@ -1,0 +1,90 @@
+## Implement async.series
+
+
+[async.parallel](https://caolan.github.io/async/docs.html#series) 
+
+>Run the functions in the tasks collection in series, each one running once the previous function has completed. If any functions in the series pass an error to its callback, no more functions are run, and callback is immediately called with the value of the erro
+
+### Question
+You have an `asyncFunction` which takes a callback and the result of the `asyncFunction` is passed to the callback,
+create a function `asyncSeries` which takes an array of asyncFunctions and a `resultCallback`. `asyncSeries` should sequentially
+execute the asyncActions, on completion of the last task, the `resultCallback` should be invoked with the results in an array.
+```text
+asyncFuntion can be of type
+function asyncFunction(callback) {
+  setTimeout(() => {
+    data is got after asyncAction is completed
+    callback(data)
+  })
+}
+
+asyncSeries is of type
+function asyncSeries(tasks, resultCallback) {
+
+}
+
+resultCallback is of type
+function resultCallback(completedResult) {
+  // completed Result
+}
+```
+
+### Thought process Pseudocode
+1. For the sake of simplicity we will create a method `createAsyncAction` which will create asyncActions
+```javascript
+function createAsyncTask() {
+  const value = Math.floor(Math.random() * 10);
+  return function(callback) {
+    setTimeout(() => {
+      callback(value);
+    }, value * 1000);
+  };
+}
+```
+2. As we do not care about the order of the results, we will use [Array.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)  
+3. The callback passed as an iterator to each asyncAction, must keep track of the taskList array index, and on meeting the length of the array
+invoke the `resultsCallback` with the desired results array.
+4. Again for simplicity the error case is not handled, but can be handled by passing an error parameter in the `resultsCallback`
+5. As we have to execute the tasks sequentially, we will use [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), and the starting value of 
+of the `reduce` array will be `Promise.resolve()`
+
+### Solution
+```javascript
+
+function asyncSeries(taskList, callback) {
+  var arr = [];
+  let tasksCompleted = 0;
+  taskList.reduce((accum, current) => {
+    return accum.then(someVal => {
+      return new Promise((resolve, reject) => {
+        current((value) => {
+          arr.push(value)
+          tasksCompleted++
+          if (tasksCompleted === taskList.length) {
+            callback.call(null, arr)
+          } else {
+            resolve(value)
+          }
+        })
+      })
+    })
+  }, Promise.resolve())
+
+}
+
+const taskList = [
+  createAsyncTask(),
+  createAsyncTask(),
+  createAsyncTask(),
+  createAsyncTask(),
+  createAsyncTask(),
+]
+
+asyncSeries(taskList, (result) => {
+  console.log("got the results", result)
+})
+
+``` 
+
+### Caveat
+Async Series, will keep the order of the taskList intact. 
