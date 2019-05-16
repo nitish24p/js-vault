@@ -11,7 +11,7 @@ const Home = props => {
           <span>Vault</span>
         </div>
         <h3 className={styles.heading}>
-          A collection of annoying JS interview questions
+          A collection of tricky JS interview questions
         </h3>
       </div>
     </div>

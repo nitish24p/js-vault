@@ -1,0 +1,105 @@
+## Attach an Event listener on an Array
+
+
+[Event Listener](https://developer.mozilla.org/en-US/docs/Web/API/EventListener) 
+
+>The EventListener interface represents an object that can handle an event dispatched by an  object.
+
+### Question
+For an array, create an event subscribing and publishing mechanism, where an event gets dispatched, when an item is added to an array,
+For simplicity do not alter the `push` method, instead create a new `pushWithEvent` method.
+```text
+const myArr = [];
+myArr.addListener('add', (items) => {
+
+})
+myArr.newPush(1)
+```
+
+### Thought process Pseudocode
+1. Vannila JS doesnt have events for array actions, although if you use libraries to make the arrays as observables
+a subscriber mechanism is enabled.
+2. As the listeners have to be available to any array we will attach all methods to the prototype
+3. A `addListener` method will two arguments, the name of the event and a callback
+
+```text
+function addListener(eventName, callback) {
+
+}
+```
+4. Incase 2 listeners are attached, with the same event name, both the callbacks should be executed
+```text
+const myArr = [];
+myArr.addListener('add', callback1)
+myArr.addListener('add', callback2)
+
+myyArr.push(1,2) // should trigger both the callbacks
+
+```
+5. The callbacks should get the event name, added values as an array and the current array as arguments.
+```text
+function callback(addedElements, context) {
+  
+}
+
+
+```
+
+### Solution
+```javascript
+/**
+ * Attaching listeners to prototyoe
+ */
+Array.prototype.listeners = {}
+Array.prototype.addListener = function (eventName, callback) {
+  if (!this.listeners.eventName) {
+    // Create a new array for new events
+    // idea of an array is we can invoke all callbacks
+    this.listeners.eventName = []
+  }
+  this.listeners.eventName.push(callback)
+}
+
+// New push Method
+// Calls trigger event
+Array.prototype.pushWithEvent = function () {
+  const size = this.length;
+  const argsList = Array.prototype.slice.call(arguments)
+  for (let index = 0; index < argsList.length; index++) {
+    this[size + index] = argsList[index]
+  }
+  // trigger add event
+
+  this.triggerEvent('add', argsList)
+}
+
+Array.prototype.triggerEvent = function (eventName, elements) {
+  if (this.listeners.eventName && this.listeners.eventName.length) {
+    this.listeners.eventName.forEach(callback => callback(eventName, elements, this))
+  }
+}
+
+
+// example
+const a = [];
+a.addListener('add', (items, args) => {
+  console.log("items were added", args)
+})
+
+a.addListener('add', (items, args) => {
+  console.log("items were added again", args)
+})
+a.pushWithEvent(1, 2, 3, "a", "b")
+console.log(a)
+
+a.pushWithEvent("hello")
+a.pushWithEvent(55)
+setTimeout(() => {
+  a.pushWithEvent("delayed")
+}, 5000)
+
+``` 
+
+### Caveat
+A remove listener method can also be added. In which case an id should be attached to the method, however this idea
+won't work if the callback is passed as an annonymous function.

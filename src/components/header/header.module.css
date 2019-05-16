@@ -82,7 +82,9 @@
   }
 
   .headerCorner button {
-    display: block
+    display: block;
+    border:none;
+    background:none;
   }
 
   .headerLockup {

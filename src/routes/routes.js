@@ -51,50 +51,25 @@ const routes = [
     preload: () => import('./../content/function-bind/function-bind.mdx')
   },
   {
-    path: '/array-filter',
+    path: '/array-listener',
     exact: true,
     main: generateMarkdown(() =>
-      import('./../content/array-filter/array-filter.mdx')
+      import('./../content/array-listener/array-listener.mdx')
+    ),
+    text: 'Array Event Listener',
+    preload: () => import('./../content/array-listener/array-listener.mdx')
+  },
+  {
+    path: '/async-parallel',
+    exact: true,
+    main: generateMarkdown(() =>
+      import('./../content/async-parallel/async-parallel.mdx')
     ),
     text: 'Implement Async Parallel',
-    preload: () => import('./../content/array-filter/array-filter.mdx')
-  },
-  {
-    path: '/array-filter',
-    exact: true,
-    main: generateMarkdown(() =>
-      import('./../content/array-filter/array-filter.mdx')
-    ),
-    text: 'Implement Async series',
-    preload: () => import('./../content/array-filter/array-filter.mdx')
-  },
-  {
-    path: '/array-filter',
-    exact: true,
-    main: generateMarkdown(() =>
-      import('./../content/array-filter/array-filter.mdx')
-    ),
-    text: 'Pollyfill for Promise',
-    preload: () => import('./../content/array-filter/array-filter.mdx')
-  },
-  {
-    path: '/array-filter',
-    exact: true,
-    main: generateMarkdown(() =>
-      import('./../content/array-filter/array-filter.mdx')
-    ),
-    text: 'Memoization of Functions',
-    preload: () => import('./../content/array-filter/array-filter.mdx')
-  },
-  {
-    path: '/array-filter',
-    exact: true,
-    main: generateMarkdown(() =>
-      import('./../content/array-filter/array-filter.mdx')
-    ),
-    text: 'Promisify a function',
-    preload: () => import('./../content/array-filter/array-filter.mdx')
+    preload: () => import('./../content/async-parallel/async-parallel.mdx')
   }
+
+  //====================DELETE JUNK BELOW THIS=====================
 ];
 
 export default routes;
