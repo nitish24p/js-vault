@@ -20,6 +20,10 @@
   text-align: center;
 }
 
+.headerCorner button {
+  display: none;
+}
+
 .headerLockup {
   position: relative;
   top: 15px;
@@ -71,3 +75,18 @@
   color: var(--primary);
   margin-left: 20px;
 }
+
+@media (max-width: 460px) {
+  .headerCorner {
+    margin-top:12px
+  }
+
+  .headerCorner button {
+    display: block
+  }
+
+  .headerLockup {
+    margin-left: 30px;
+  }
+
+} 

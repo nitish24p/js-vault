@@ -21,6 +21,7 @@ const SidebarItem = props => {
 class Sidebar extends React.PureComponent {
   static MenuItem = SidebarItem;
   onLinkClick = () => {
+    this.props.onLinkClick && this.props.onLinkClick();
     console.log('clicked a link');
   };
 
@@ -38,8 +39,13 @@ class Sidebar extends React.PureComponent {
   };
 
   render() {
+    const { open } = this.props;
+    console.log('inside open', open);
     return (
-      <div className={styles.sidebar} id="sidebar">
+      <div
+        className={`${styles.sidebar} ${open ? styles.reveal : ''}`}
+        id="sidebar"
+      >
         <div className={styles.navigationListParent}>
           <ul className={styles.navList}>{this.renderChildren()}</ul>
         </div>

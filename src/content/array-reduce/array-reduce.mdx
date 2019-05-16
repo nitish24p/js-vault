@@ -3,14 +3,17 @@
 
 [Array.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) 
 
->The map() method creates a new array with the results of calling a provided function on every element in the calling array.
+>The reduce() method executes a reducer function (that you provide) on each element of the array, resulting in a single output value.
 
 ### Question
-Implement the `Array.map` method
+Implement the `Array.reduce` method
 
 ### Thought process Pseudocode
-1. A function which takes a function as an argument
-2. The function argument must be passed the array index, the item and the context
+1. A function which takes a function as an argument and a starting value
+2. The reducer function, takes four parameters, an accumulator, a current value, index, the source array
+3. The starting value if passed, must be used as the initial accumulator, if no accumulator is passed then the first
+element of the array becomes the first element itself
+4. The execution context of the callback becomes the that of the accumulator.
 
 ### Solution
 ```javascript
@@ -21,8 +24,8 @@ Implement the `Array.map` method
  */
 
 /**
- * The callback gets 3 arguments
- * the item, the index and the  execution context
+ * The callback gets 4 arguments
+ * an accumulator, current value, index, current array
  * 
  */
 Array.prototype.newReduce = function (callback, startingValue) {
@@ -41,11 +44,11 @@ Array.prototype.newReduce = function (callback, startingValue) {
 }
 
 const nums = [1, 2, 3, 4, 5]
-const sum = nums.newReduce((accum, current) => {
+const double = nums.newReduce((accum, current) => {
   accum.push(current * 2)
   return accum
 }, []);
-console.log(sum)
+console.log(double)
 
 const queryString = "cat=meow&duck=quack&dog=woof";
 
@@ -60,4 +63,7 @@ console.log(queryObject);
 ``` 
 
 ### Caveat
-The reason for the if condition is basically, to ensure the item is present in the array, `Array.map` does not alter the index of the items in the resultant array, hence in the  case above there will be 6 entries which will be emtpty
+Only the accumulator and the current value are mandatory parameters in the callback function, the initial value as seen above
+is optional. Calling reduce() on an empty array without an initialValue will throw a TypeError. This method
+is useful if you want to transform the elements in an array into a single entity. The `reduce` can be used to 
+implement the `Array.map` and `Array.reduce` method.
