@@ -63,7 +63,9 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "stage": "yarn run build && cp src/netlify/_redirects build/.",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "now-dev": "node scripts/start.js",
+    "now-build": "node scripts/build.js"
   },
   "eslintConfig": {
     "extends": "react-app"
