@@ -55,7 +55,6 @@
   .sidebar {
     width: 240px;
     height: 100%;
-    position: absolute;
     left: -240px;
     background: #fff;
     transition: transform 0.2s;
