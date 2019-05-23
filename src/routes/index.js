@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import routes from './routes';
 import generateMarkDown from './../content/generateLazyMarkdown';
 
-const Home = generateMarkDown(() => import('./../content/home/home'));
+const Home = generateMarkDown(() => import('./../content/home/home.mdx'));
 
 export default () => (
   // <Router>
