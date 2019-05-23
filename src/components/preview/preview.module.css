@@ -1,0 +1,23 @@
+.previewWrapper {
+  padding: 0px 10px
+}
+
+.preview {
+  padding: 10px;
+  background: #dedede;
+  min-height: 200px;
+  border-radius: 2px;
+}
+
+.pre {
+  white-space: pre-wrap;       /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;  
+}
+
+.error {
+  background: #efadad;
+  color: #734d4d
+}

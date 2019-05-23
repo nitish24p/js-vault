@@ -11,7 +11,7 @@
 }
 
 .slideIn {
-  transform: translateX(calc(-100vw + 200px))
+  transform: translateX(calc(-100vw))
 }
 
 .button {
