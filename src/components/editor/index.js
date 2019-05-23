@@ -1,4 +1,5 @@
 import React, { Fragment, Component, lazy, Suspense } from 'react';
+import message from './defaultMessage';
 //import MonacoEditor from 'react-monaco-editor';
 //import Preview from './preview';
 
@@ -8,7 +9,7 @@ class Editor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      code: '// type your code...',
+      code: message,
       value: undefined
     };
   }
