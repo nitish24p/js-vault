@@ -1,0 +1,29 @@
+.editorParent {
+  position: fixed;
+  right: -100vw;
+  top:0;
+  bottom:0;
+  background: #fff;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.06), 0 4px 5px 0 rgba(0,0,0,.06), 0 1px 9px 3px rgba(0,0,0,.08);
+  width: calc(100vw - 240px);
+  transition: transform 0.4s;
+  padding: 90px 20px 20px 20px;
+}
+
+.slideIn {
+  transform: translateX(calc(-100vw))
+}
+
+.button {
+  outline: 0;
+  border: none;
+  background: var(--primary);
+  padding: 6px 16px;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 4px;
+}
+
+.button:active {
+  background: #1d3694
+}

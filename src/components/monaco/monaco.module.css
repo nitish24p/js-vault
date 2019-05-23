@@ -1,0 +1,43 @@
+.wrapper {
+  display: flex
+}
+
+.runButton {
+  outline: 0;
+  border: none;
+  background: var(--primary);
+  padding: 8px 20px;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 4px;
+}
+
+.runButton:active {
+  background: #1d3694
+}
+
+.monacoWrapper {
+  flex-basis: 70%
+}
+
+.previewWrapper {
+  flex-basis: 30%;
+  word-break: break-word
+}
+
+.buttonGroup {
+  display: flex;
+  padding: 10px 0px;
+}
+
+.buttonGroup button {
+  margin: 0px 10px
+}
+
+.secondaryButton {
+  background: #8e939e
+}
+
+.secondaryButton:active {
+  background: #525252
+}

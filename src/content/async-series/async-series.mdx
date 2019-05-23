@@ -1,3 +1,5 @@
+import Editor from './../../components/editor';
+
 ## Implement async.series
 
 
@@ -47,6 +49,8 @@ invoke the `resultsCallback` with the desired results array.
 4. Again for simplicity the error case is not handled, but can be handled by passing an error parameter in the `resultsCallback`
 5. As we have to execute the tasks sequentially, we will use [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), and the starting value of 
 of the `reduce` array will be `Promise.resolve()`
+
+<Editor />
 
 ### Solution
 ```javascript
