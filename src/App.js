@@ -12,7 +12,16 @@ class App extends Component {
   toggleSidebar = () => {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     if (isMobile) {
-      this.setState(({ isSidebarOpen }) => ({ isSidebarOpen: !isSidebarOpen }));
+      this.setState(
+        ({ isSidebarOpen }) => ({ isSidebarOpen: !isSidebarOpen }),
+        () => {
+          if (this.state.isSidebarOpen) {
+            document.querySelector('body').classList.add(styles.fixScroll);
+          } else {
+            document.querySelector('body').classList.remove(styles.fixScroll);
+          }
+        }
+      );
     }
   };
   render() {

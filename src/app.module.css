@@ -13,4 +13,8 @@
     
     padding-top: 70px;
   }
-} 
+}
+
+.fixScroll {
+  overflow: hidden
+}
