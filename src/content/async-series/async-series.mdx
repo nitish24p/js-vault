@@ -1,7 +1,7 @@
 ## Implement async.series
 
 
-[async.parallel](https://caolan.github.io/async/docs.html#series) 
+[async.series](https://caolan.github.io/async/docs.html#series) 
 
 >Run the functions in the tasks collection in series, each one running once the previous function has completed. If any functions in the series pass an error to its callback, no more functions are run, and callback is immediately called with the value of the erro
 
@@ -41,7 +41,7 @@ function createAsyncTask() {
   };
 }
 ```
-2. As we do not care about the order of the results, we will use [Array.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)  
+2. As we do care about the order of the results, we will use [Array.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)  
 3. The callback passed as an iterator to each asyncAction, must keep track of the taskList array index, and on meeting the length of the array
 invoke the `resultsCallback` with the desired results array.
 4. Again for simplicity the error case is not handled, but can be handled by passing an error parameter in the `resultsCallback`
