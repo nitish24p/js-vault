@@ -66,6 +66,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "stage": "yarn run build && cp src/netlify/_redirects build/.",
+    "prod:build": "yarn run stage && cp src/netlify/robots.txt build/.",
     "test": "node scripts/test.js",
     "postbuild": "react-snap"
   },
