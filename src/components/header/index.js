@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './header.module.css';
 import logo from './../../assets/logo_v1.png';
+import { Link } from 'react-router-dom';
 
 const Header = props => (
   <header className={styles.header}>
@@ -18,8 +19,10 @@ const Header = props => (
       </button>
     </div>
     <div className={styles.headerLockup}>
-      <img src={logo} width="40" alt="logo" />
-      <span className={styles.title}>Vault</span>
+      <Link to="/" className={styles.link}>
+        <img src={logo} width="40" alt="logo" />
+        <span className={styles.title}>Vault</span>
+      </Link>
     </div>
   </header>
 );
