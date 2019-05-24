@@ -1,6 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, lazy, Suspense } from 'react';
 import styles from './editor.module.css';
-import Monaco from './../monaco';
+//import Monaco from './../monaco';
+
+const Monaco = lazy(() => import('./../monaco'));
 
 class Editor extends Component {
   state = {
@@ -25,7 +27,11 @@ class Editor extends Component {
             showEditor ? styles.slideIn : ''
           }`}
         >
-          {showEditor ? <Monaco onToggle={this.toggleEditor} /> : null}
+          {showEditor ? (
+            <Suspense fallback={<div>Loading...</div>}>
+              <Monaco onToggle={this.toggleEditor} />
+            </Suspense>
+          ) : null}
         </div>
         <button
           aria-label="try out"

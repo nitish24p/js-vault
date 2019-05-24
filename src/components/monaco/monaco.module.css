@@ -17,7 +17,8 @@
 }
 
 .monacoWrapper {
-  flex-basis: 70%
+  //flex-basis: 70%;
+  flex: 1
 }
 
 .previewWrapper {
