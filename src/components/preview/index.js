@@ -14,7 +14,10 @@ const Preview = ({ value, error, logs }) => {
     <div className={styles.previewWrapper} id="preview">
       <h4>Output</h4>
       <div className={`${styles.preview} ${error ? styles.error : ''}`}>
-        <pre className={styles.pre}>{JSON.stringify(value)}</pre>
+        {logs.length === 0 ? (
+          <pre className={styles.pre}>{JSON.stringify(value)}</pre>
+        ) : null}
+
         <div>
           {logs.map((logArray, index) => (
             <p key={index}>
@@ -25,6 +28,9 @@ const Preview = ({ value, error, logs }) => {
             </p>
           ))}
         </div>
+        {logs.length !== 0 ? (
+          <pre className={styles.pre}>{JSON.stringify(value)}</pre>
+        ) : null}
       </div>
     </div>
   );
