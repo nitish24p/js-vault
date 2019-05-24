@@ -76,6 +76,12 @@
   margin-left: 20px;
 }
 
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
 @media (max-width: 460px) {
   .headerCorner {
     margin-top:12px
