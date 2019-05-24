@@ -4,7 +4,7 @@
 
 .preview {
   padding: 10px;
-  background: #dedede;
+  background: #0d1323;
   min-height: 200px;
   border-radius: 2px;
 }
@@ -24,7 +24,8 @@
   white-space: -pre-wrap;      /* Opera 4-6 */
   white-space: -o-pre-wrap;    /* Opera 7 */
   word-wrap: break-word;
-  font-weight: 500
+  font-weight: 500;
+  color: #fff
 }
 
 .error {
