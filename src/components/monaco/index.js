@@ -6,6 +6,13 @@ import styles from './monaco.module.css';
 
 const MonacoEditor = lazy(() => import('react-monaco-editor'));
 
+const overRideConsole = `
+function log() {
+  const args = Array.prototype.slice.call(arguments)
+  console.log(...args)
+}
+`;
+
 class Editor extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +39,11 @@ class Editor extends Component {
     //var theInstructions = "alert('Hello World'); var x = 100";
 
     try {
-      const F = new Function(value);
+      const F = new Function(`
+      
+        ${overRideConsole}
+        ${value}
+      `);
       const output = F();
       console.log(output, 'This is the code');
       if (output) {
