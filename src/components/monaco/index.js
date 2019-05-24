@@ -12,52 +12,62 @@ class Editor extends Component {
     this.state = {
       code: message,
       value: undefined,
-      error: false
+      error: false,
+      logs: []
     };
+
+    this.logger = this.logger.bind(this);
   }
   editorDidMount(editor, monaco) {
-    console.log('editorDidMount', editor);
     editor.focus();
   }
   onChange(newValue, e) {
-    console.log('onChange', newValue, e);
+    //console.log('onChange', newValue, e);
   }
 
   monacoRed = ref => (this.monacoRef = ref);
 
+  logger() {
+    const args = Array.prototype.slice.call(arguments);
+    console.log(...args);
+    const logs = this.state.logs;
+    logs.push(args);
+    this.setState({
+      logs
+    });
+  }
+
   compile = () => {
     const model = this.refs.monaco.editor.getModel();
     const value = model.getValue();
-    console.log(value);
+    //console.log(value);
     //var theInstructions = "alert('Hello World'); var x = 100";
-
-    try {
-      const F = new Function(value);
-      const output = F();
-      console.log(output, 'This is the code');
-      if (output) {
-        this.setState({
-          value: output,
-          error: false
-        });
-      } else {
-        this.setState({
-          value: 'Did you forget a return statement',
-          error: true
-        });
+    this.setState(
+      {
+        logs: []
+      },
+      () => {
+        try {
+          const F = new Function('log', value);
+          const output = F(this.logger);
+          this.setState({
+            value: output,
+            error: false
+          });
+        } catch (error) {
+          const { message } = error;
+          this.setState({
+            error: true,
+            value: message
+          });
+        }
       }
-    } catch (error) {
-      const { message } = error;
-      this.setState({
-        error: true,
-        value: message
-      });
-    }
+    );
 
     //return();
   };
   render() {
-    const code = this.state.code;
+    const { code, logs } = this.state;
     const options = {
       selectOnLineNumbers: true,
       fontSize: 14
@@ -71,11 +81,16 @@ class Editor extends Component {
               <div className={styles.buttonGroup}>
                 <button
                   onClick={this.props.onToggle}
+                  aria-label="close"
                   className={`${styles.runButton} ${styles.secondaryButton}`}
                 >
                   Close
                 </button>
-                <button onClick={this.compile} className={styles.runButton}>
+                <button
+                  onClick={this.compile}
+                  aria-label="run"
+                  className={styles.runButton}
+                >
                   Run
                 </button>
               </div>
@@ -92,7 +107,11 @@ class Editor extends Component {
               />
             </div>
             <div className={styles.previewWrapper}>
-              <Preview value={this.state.value} error={this.state.error} />
+              <Preview
+                value={this.state.value}
+                error={this.state.error}
+                logs={logs}
+              />
             </div>
           </div>
         </Suspense>

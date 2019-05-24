@@ -3,7 +3,6 @@ import styles from './sidebar.module.css';
 import { NavLink } from 'react-router-dom';
 
 const SidebarItem = props => {
-  console.log('called');
   return (
     <li>
       <NavLink
@@ -22,7 +21,6 @@ class Sidebar extends React.PureComponent {
   static MenuItem = SidebarItem;
   onLinkClick = () => {
     this.props.onLinkClick && this.props.onLinkClick();
-    console.log('clicked a link');
   };
 
   onHoverLink = preload => {
@@ -40,7 +38,6 @@ class Sidebar extends React.PureComponent {
 
   render() {
     const { open } = this.props;
-    console.log('inside open', open);
     return (
       <div
         className={`${styles.sidebar} ${open ? styles.reveal : ''}`}
