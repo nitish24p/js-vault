@@ -4,9 +4,20 @@
 
 .preview {
   padding: 10px;
-  background: #dedede;
+  background: #0d1323;
   min-height: 200px;
-  border-radius: 2px;
+  border-radius: 4px;
+  overflow-y: scroll;
+  max-height: 500px;
+}
+
+.preview p {
+  color: #3155db;
+  font-weight: 500
+}
+
+.preview span {
+  color: #636363;
 }
 
 .pre {
@@ -14,7 +25,9 @@
   white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
   white-space: -pre-wrap;      /* Opera 4-6 */
   white-space: -o-pre-wrap;    /* Opera 7 */
-  word-wrap: break-word;  
+  word-wrap: break-word;
+  font-weight: 500;
+  color: #fff
 }
 
 .error {

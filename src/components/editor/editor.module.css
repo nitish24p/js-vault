@@ -8,6 +8,7 @@
   width: calc(100vw - 240px);
   transition: transform 0.4s;
   padding: 90px 20px 20px 20px;
+  //overflow-y: scroll;
 }
 
 .slideIn {

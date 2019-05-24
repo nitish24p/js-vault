@@ -1,3 +1,8 @@
+::-webkit-scrollbar { 
+    display: none; 
+}
+.element { overflow: -moz-scrollbars-none; }
+.element { -ms-overflow-style: none; }
 body {
   margin: 0;
   padding: 0;
