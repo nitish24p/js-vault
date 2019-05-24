@@ -6,21 +6,6 @@ import styles from './monaco.module.css';
 
 const MonacoEditor = lazy(() => import('react-monaco-editor'));
 
-// function compileSource(source) {
-//   const result = [];
-//   //function
-
-//   const F = new Function('log',source);
-//   const resultMeta = {
-//     type: 'output',
-//     value: F()
-//   };
-
-//   result.push(resultMeta);
-
-//   return result;
-// }
-
 class Editor extends Component {
   constructor(props) {
     super(props);
