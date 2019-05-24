@@ -81,11 +81,16 @@ class Editor extends Component {
               <div className={styles.buttonGroup}>
                 <button
                   onClick={this.props.onToggle}
+                  aria-label="close"
                   className={`${styles.runButton} ${styles.secondaryButton}`}
                 >
                   Close
                 </button>
-                <button onClick={this.compile} className={styles.runButton}>
+                <button
+                  onClick={this.compile}
+                  aria-label="run"
+                  className={styles.runButton}
+                >
                   Run
                 </button>
               </div>
