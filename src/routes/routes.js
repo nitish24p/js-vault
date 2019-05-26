@@ -74,6 +74,27 @@ const routes = [
       'Implement Async.series, which executes a set of asycn tasks in series'
   },
   {
+    path: '/memoize-function',
+    exact: true,
+    main: generateMarkdown(() =>
+      import('./../content/memoize-function/memoize-function.mdx')
+    ),
+    text: 'Memoize any function',
+    preload: () => import('./../content/memoize-function/memoize-function.mdx'),
+    longText:
+      'Write a function which will memoize subsequent calls to a function'
+  },
+  {
+    path: '/array-flatten',
+    exact: true,
+    main: generateMarkdown(() =>
+      import('./../content/array-flatten/array-flatten.mdx')
+    ),
+    text: 'Implement Promise.all',
+    preload: () => import('./../content/array-flatten/array-flatten.mdx'),
+    longText: 'Write a method which will flatten any array into a 1D array'
+  },
+  {
     path: '/array-listener',
     exact: true,
     main: generateMarkdown(() =>

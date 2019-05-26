@@ -1,0 +1,60 @@
+import Editor from './../../components/editor';
+
+## Flatten an array
+
+
+[Array.flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) 
+
+>The flat() method creates a new array with all sub-array elements concatenated into it recursively up to the specified depth.
+
+
+
+### Question
+Write a method which will flatten any array
+```text
+inputArray = [1, 2, [3, 4], 5, [[[6, 7], 8, [[[[9]]]]]]]
+
+function flatten(inputArray) => output [1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+### Thought process Pseudocode
+1. We attach the method to the array prototype, the input is the `this` array itself,
+2. We create a result Flatarray, and iterate through the input array.
+3. For each value check if it's an array itself, if so recursively call the same function
+4. if the element is not an array, push it into the result array.
+
+<Editor />
+
+### Solution
+```javascript
+Array.prototype.flatten = function () {
+  let flatArray = []
+  for (let index = 0; index < this.length; index++) {
+    const element = this[index];
+    if (Array.isArray(element)) {
+      flatArray = flatArray.concat(this.flatten.call(element))
+    } else {
+      flatArray.push(element)
+    }
+  }
+
+  return flatArray;
+}
+
+// function flatten
+
+
+
+//const nestedArr = [[1], [[1, 4, [5, 3]], [1, 2, 3, 4]]] => [1, 1, 4, 5, 3, 1, 2, 3, 4]
+
+const nestedArr = [[1], [[1, 4, [5, 3]], [1, 2, 3, [3, 4, [2, [22, [3, 4, 5, 6, 5, [2]]]]], 4]]]
+//const nestedArr = [1, 2, 3, 4, [1]]
+
+const flat = nestedArr.flatten();
+console.log(flat);
+
+``` 
+
+### Caveat
+As we're creating a new array at every recursive call, this won't be a very handy method if you have large arrays
+in that case we can simply use array.push
