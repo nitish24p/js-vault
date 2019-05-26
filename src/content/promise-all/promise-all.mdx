@@ -1,92 +1,88 @@
+import Editor from './../../components/editor';
+
 ## Implement Promise.all
 
 
-[Promise.all](https://caolan.github.io/async/docs.html#series) 
+[Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) 
 
->Run the functions in the tasks collection in series, each one running once the previous function has completed. If any functions in the series pass an error to its callback, no more functions are run, and callback is immediately called with the value of the erro
+>The Promise.all() method returns a single Promise that resolves when all of the promises passed as an iterable have resolved or when the iterable contains no promises. It rejects with the reason of the first promise that rejects.
 
 
 
 ### Question
-You have an `asyncFunction` which takes a callback and the result of the `asyncFunction` is passed to the callback,
-create a function `asyncSeries` which takes an array of asyncFunctions and a `resultCallback`. `asyncSeries` should sequentially
-execute the asyncActions, on completion of the last task, the `resultCallback` should be invoked with the results in an array.
+Write a function `newPromiseAll` which takes an array of Promises as an argument, and retuns a promise,
+which if resolved, returns the result of each promise in an array, or an error catch block, if one of the
+promises is rejected.
 ```text
-asyncFuntion can be of type
-function asyncFunction(callback) {
-  setTimeout(() => {
-    data is got after asyncAction is completed
-    callback(data)
+newPromiseAll(promises)
+  .then(results => {
+
   })
-}
+  .catch(e => {
 
-asyncSeries is of type
-function asyncSeries(tasks, resultCallback) {
-
-}
-
-resultCallback is of type
-function resultCallback(completedResult) {
-  // completed Result
-}
+  })
 ```
 
 ### Thought process Pseudocode
-1. For the sake of simplicity we will create a method `createAsyncAction` which will create asyncActions
+1. For the sake of simplicity we will create a method `task` which will create a promise and resolve it 
+in some time x.
 ```javascript
-function createAsyncTask() {
-  const value = Math.floor(Math.random() * 10);
-  return function(callback) {
-    setTimeout(() => {
-      callback(value);
-    }, value * 1000);
-  };
+function task(time) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      resolve(time);
+    }, time);
+  });
 }
 ```
-2. As we do not care about the order of the results, we will use [Array.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)  
-3. The callback passed as an iterator to each asyncAction, must keep track of the taskList array index, and on meeting the length of the array
-invoke the `resultsCallback` with the desired results array.
-4. Again for simplicity the error case is not handled, but can be handled by passing an error parameter in the `resultsCallback`
-5. As we have to execute the tasks sequentially, we will use [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), and the starting value of 
-of the `reduce` array will be `Promise.resolve()`
+2. Since the order of the results array is important, we will chain each promise resolution to the next one
+3. A simple forEach iterator can be used, and we need to keep track of the index of the parent array
+4. When the number of promises resolved is equal to the length of the task array we will resolve the overall results array.
+
+<Editor />
 
 ### Solution
 ```javascript
 
-function asyncSeries(taskList, callback) {
-  var arr = [];
-  let tasksCompleted = 0;
-  taskList.reduce((accum, current) => {
-    return accum.then(someVal => {
-      return new Promise((resolve, reject) => {
-        current((value) => {
-          arr.push(value)
-          tasksCompleted++
-          if (tasksCompleted === taskList.length) {
-            callback.call(null, arr)
-          } else {
-            resolve(value)
-          }
-        })
-      })
-    })
-  }, Promise.resolve())
 
+function task(time) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      resolve(time);
+    }, time);
+  });
 }
 
-const taskList = [
-  createAsyncTask(),
-  createAsyncTask(),
-  createAsyncTask(),
-  createAsyncTask(),
-  createAsyncTask(),
-]
+const taskList = [task(1000), task(5000), task(3000)];
+// returns promise with results in an array
 
-asyncSeries(taskList, (result) => {
-  console.log("got the results", result)
-})
+function myPromiseAll(taskList) {
+  const results = []
+  let promisesCompleted = 0;
+  return new Promise((resolve, reject) => {
+    taskList.forEach((promise, index) => {
+      promise.then((val) => {
+        results[index] = val;
+        promisesCompleted += 1;
+        if (promisesCompleted === taskList.length) {
+          resolve(results)
+        }
+      })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  });
+}
+
+myPromiseAll(taskList)
+  .then(results => {
+    console.log("got results", results)
+  })
+  .catch(console.error)
 
 ``` 
 
 ### Caveat
-Async Series, will keep the order of the taskList intact. 
+Promise.all will fail if even one of the promises fail. The order of the results array is maintained
+and is equal to the task list.
