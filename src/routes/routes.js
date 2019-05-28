@@ -85,12 +85,22 @@ const routes = [
       'Write a function which will memoize subsequent calls to a function'
   },
   {
+    path: '/promise-all',
+    exact: true,
+    main: generateMarkdown(() =>
+      import('./../content/promise-all/promise-all.mdx')
+    ),
+    text: 'Implement Promise.all',
+    preload: () => import('./../content/promise-all/promise-all.mdx'),
+    longText: 'Write a method which will implement Promise.all'
+  },
+  {
     path: '/array-flatten',
     exact: true,
     main: generateMarkdown(() =>
       import('./../content/array-flatten/array-flatten.mdx')
     ),
-    text: 'Implement Promise.all',
+    text: 'Flatten An Array',
     preload: () => import('./../content/array-flatten/array-flatten.mdx'),
     longText: 'Write a method which will flatten any array into a 1D array'
   },
