@@ -1,6 +1,7 @@
 import React from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import Code from './../code';
+import Disqus from 'disqus-react';
 import {
   blockquote,
   anchor,
@@ -10,6 +11,7 @@ import {
   ul
 } from './customComponents';
 import colors from './colors';
+
 const components = {
   h1: props => <h1 style={{ color: colors.primary }} {...props} />,
   h2: props => <h2 style={{ color: colors.primary }} {...props} />,
@@ -41,8 +43,13 @@ const components = {
   ),
   code: Code
 };
-export default props => (
+export default props =>{
+  const {pathname, shortname, config}=props;
+  return (
   <MDXProvider components={components}>
-    <div {...props} style={markdown} />
+    <div style={{width:'100%'}}>
+      <div {...props} style={markdown} />
+      {pathname!=='/' && <Disqus.DiscussionEmbed shortname={shortname} config={config} />}
+    </div>
   </MDXProvider>
-);
+)};
