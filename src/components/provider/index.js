@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { lazy, useState, Suspense } from "react";
 import { MDXProvider } from "@mdx-js/react";
 import Code from "./../code";
-import Disqus from "disqus-react";
 import {
   blockquote,
   anchor,
@@ -11,6 +10,8 @@ import {
   ul
 } from "./customComponents";
 import colors from "./colors";
+
+const Disqus = lazy(() => import("./disqus"));
 
 const components = {
   h1: props => <h1 style={{ color: colors.primary }} {...props} />,
@@ -55,7 +56,9 @@ export default props => {
         <div {...props} style={markdown} />
         {pathname !== "/" &&
           (visible ? (
-            <Disqus.DiscussionEmbed shortname={shortname} config={config} />
+            <Suspense fallback={<div>loading disqus</div>}>
+              <Disqus shortname={shortname} config={config} />
+            </Suspense>
           ) : (
             <div className="loadButton" onClick={displayComments}>
               load comments
