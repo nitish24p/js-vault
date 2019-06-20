@@ -1,8 +1,12 @@
-::-webkit-scrollbar { 
-    display: none; 
+::-webkit-scrollbar {
+  display: none;
 }
-.element { overflow: -moz-scrollbars-none; }
-.element { -ms-overflow-style: none; }
+.element {
+  overflow: -moz-scrollbars-none;
+}
+.element {
+  -ms-overflow-style: none;
+}
 body {
   margin: 0;
   padding: 0;
@@ -12,7 +16,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 18px;
-  position: relative
+  position: relative;
 }
 
 code {
@@ -24,5 +28,17 @@ code {
   background: #dedede !important;
   font-style: italic;
   font-weight: 600;
-  
+}
+
+.loadButton {
+  background: #4db2ec;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 30px;
+  text-align: center;
+  margin-bottom: 20px;
+  cursor: pointer;
 }

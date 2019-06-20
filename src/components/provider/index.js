@@ -1,7 +1,7 @@
-import React from 'react';
-import { MDXProvider } from '@mdx-js/react';
-import Code from './../code';
-import Disqus from 'disqus-react';
+import React, { useState } from "react";
+import { MDXProvider } from "@mdx-js/react";
+import Code from "./../code";
+import Disqus from "disqus-react";
 import {
   blockquote,
   anchor,
@@ -9,8 +9,8 @@ import {
   markdown,
   ol,
   ul
-} from './customComponents';
-import colors from './colors';
+} from "./customComponents";
+import colors from "./colors";
 
 const components = {
   h1: props => <h1 style={{ color: colors.primary }} {...props} />,
@@ -29,7 +29,7 @@ const components = {
       {props.children}
     </p>
   ),
-  pre: props => <div {...props} style={{ overflow: 'auto' }} />,
+  pre: props => <div {...props} style={{ overflow: "auto" }} />,
   blockquote: props => <blockquote {...props} style={blockquote} />,
   ol: props => (
     <ol {...props} style={ol}>
@@ -43,13 +43,25 @@ const components = {
   ),
   code: Code
 };
-export default props =>{
-  const {pathname, shortname, config}=props;
+export default props => {
+  const { pathname, shortname, config } = props;
+  const [visible, setVisible] = useState(false);
+  const displayComments = () => {
+    setVisible(true);
+  };
   return (
-  <MDXProvider components={components}>
-    <div style={{width:'100%'}}>
-      <div {...props} style={markdown} />
-      {pathname!=='/' && <Disqus.DiscussionEmbed shortname={shortname} config={config} />}
-    </div>
-  </MDXProvider>
-)};
+    <MDXProvider components={components}>
+      <div style={{ width: "100%" }}>
+        <div {...props} style={markdown} />
+        {pathname !== "/" &&
+          (visible ? (
+            <Disqus.DiscussionEmbed shortname={shortname} config={config} />
+          ) : (
+            <div className="loadButton" onClick={displayComments}>
+              load comments
+            </div>
+          ))}
+      </div>
+    </MDXProvider>
+  );
+};
