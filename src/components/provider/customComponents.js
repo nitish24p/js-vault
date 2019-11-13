@@ -30,7 +30,8 @@ const table = {
 const markdown = {
   display: 'block',
   overflow: 'auto',
-  width: '100%'
+  width: '100%',
+  marginBottom: '20px',
 };
 
 const ol = {
