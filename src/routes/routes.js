@@ -60,7 +60,7 @@ const routes = [
     text: 'Implement Async Parallel',
     preload: () => import('./../content/async-parallel/async-parallel.mdx'),
     longText:
-      'Implement Async.parallel, which executes a set of asycn tasks parallelly'
+      'Implement Async.parallel, which executes a set of async tasks parallelly'
   },
   {
     path: '/async-series',
@@ -71,7 +71,7 @@ const routes = [
     text: 'Implement Async Series',
     preload: () => import('./../content/async-series/async-series.mdx'),
     longText:
-      'Implement Async.series, which executes a set of asycn tasks in series'
+      'Implement Async.series, which executes a set of async tasks in series'
   },
   {
     path: '/memoize-function',
