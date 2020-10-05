@@ -1,0 +1,98 @@
+import Editor from './../../components/editor';
+
+## Promisify a function
+
+
+[Utils.Promisify](https://nodejs.org/dist/latest-v8.x/docs/api/util.html#util_util_promisify_original) 
+
+>Takes a function following the common error-first callback style, i.e. taking a (err, value) => ... callback as the last argument, and returns a version that returns promises.
+
+
+
+### Question
+Write a function `promisify` which takes a function (which follows the common error-first callback style), and retuns a function,
+which is then called to get the results in the form of promises.
+```javascript
+// Old ussage
+asyncFunction(1,2, function(result, err) {
+  console.log(result,err)
+})
+
+
+// New Usage
+const promisifiedFn = promisify(asyncFunction);
+ promisifiedFn(1, 2)
+   .then(res => {
+     console.log("result", res);
+   })
+   .catch(console.log);
+```
+
+### Thought process Pseudocode
+1. We are creating a higher order function, which is a function which returns the promisified version of the argument function.
+```javascript
+function promisify(fn) {
+  return function inner( ){
+      
+  }
+}
+```
+2. Original function is called this way : `fn(...arguments, callback)` as `arguments` object has the arguments given to the inner function, and we spread that object to pass all the arguments to the function.
+3. In callback function, first arg is err and next is the result. If err is null, we resolve the promise, else reject it.
+4. This promise is returned, so that .then() and async/await can be used with the function, thus it is promisified!
+
+<Editor />
+
+### Solution
+```javascript
+
+// A sample async function to test the promisify function
+function asyncFunction(a, b, callback) {
+  const isError = Math.random() > 0.7;
+  setTimeout(() => {
+    if (isError) {
+      callback(null, new Error("Something went wrong"));
+      return;
+    }
+
+    callback(a + b, null);
+  }, 3000);
+}
+
+function promisify(fn) {
+  // Return promisified function
+  // Arguments to this function are stored in 'arguments' object
+  return function inner( ){
+      return new Promise((resolve, reject)=>{
+        // Pass arguments to original function, along with a callback function
+        fn(...arguments, function (result, err){
+          if(err){
+            // Error occured, so reject the promise.
+            reject(err)
+          } else {
+            // No error, so resolve the promise.
+            resolve(result)
+          }
+        })
+      })
+  }
+}
+
+//Old ussage
+asyncFunction(1,2, function(result, err) {
+  console.log("Result using callback", result,err)
+})
+
+
+// New Usage
+const promisifiedFn = promisify(asyncFunction);
+promisifiedFn(1, 2)
+  .then(res => {
+    console.log("Result using promise", res);
+  })
+  .catch(console.log);
+
+``` 
+
+### Caveat
+The `promisify()` function will work only if the original function is error-first callback style.
