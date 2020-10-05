@@ -1,0 +1,148 @@
+import Editor from './../../components/editor';
+
+## Implement event-dispatcher
+
+[EventDispatcher](https://developer.mozilla.org/ru/docs/Web/API/EventTarget) 
+
+Event Dispatcher implemented by objects that can receive events and may have listeners for them.
+
+### Question
+Implement an Event dispatcher
+which has a way to add listener, remove listeners
+and dispatch events
+
+```javascript
+EventDispatcher.addEventListener()
+EventDispatcher.removeEventListener()
+EventDispatcher.dispatch(Event)
+```
+
+1. Create `EventDispatcher` class with 3 empty methods:
+
+```javascript
+addEventListener
+removeEventListener
+dispatch
+```
+
+2. Add `_listeners` store as object in `EventDispatcher`:
+```javascript
+constructor() {
+  this._listeners = {};
+}
+```
+
+3. Implement `addEventListener` that stores listener to `_listeners`:
+```javascript
+const ed = new EventDispather();
+
+ed.addEventListener('event', () => {});
+```
+
+4. Also we need to implement `removeEventListener` to delete some listeners:
+```javascript
+const ed = new EventDispather();
+
+ee.removeEventListener('event', () => {});
+```
+
+5. Last one is `dispatch()`:
+```javascript
+/* 
+  We can create native events in browser like this: 
+*/
+const event = new CustomEvent('my-event');
+
+const ed = new EventDispather();
+
+/* dispatch this event */
+
+ed.addEventListener('event', () => {
+  /* should handle event below */
+});
+
+ed.dispatchEvent(event);
+
+```
+
+<Editor />
+
+### Solution
+```javascript
+class EventDispatcher {
+  constructor() {
+    // listeners store
+    this._listeners = {};
+  }
+
+  addEventListener(type, listener) {
+    // validation
+    if (this._listeners[type] === undefined) {
+      this._listeners[type] = [];
+    }
+
+    // if event not provided push into listeners array
+    if (this._listeners[type].indexOf(listener) === -1) {
+      this._listeners[type].push(listener);
+    }
+  }
+
+
+  removeEventListener(type, listener) {
+    // validation
+    if (this._listeners === undefined || this._listeners[type] === undefined) return;
+
+    // found listener candidate to delete
+    const index = this._listeners[type].indexOf(listener);
+
+    // if founded delete
+    if (index !== -1) {
+      this._listeners[type].splice(index, 1);
+    }
+  }
+
+  dispatchEvent(event) {
+    // validation
+    if (this._listeners === undefined || this._listeners[event.type] === undefined) return;
+
+    // create a copy to avoid race condition
+    const eventListenersCopy = this._listeners[event.type].slice(0);
+
+    // bind target context
+    event.target = this;
+
+    // move through listeners array and dispatch
+    for (let i = 0; i < eventListenersCopy.length; i++){
+      eventListenersCopy[i].call(this, event);
+    }
+  } 
+}
+
+// example using below
+
+const ed = new EventDispatcher();
+
+// DO NOT USE ON PRODUCTION. ONLY FOR EXAMPLE
+const event = {
+  target: null,
+  type: 'my-event'
+};
+
+const listener = () => {
+  console.log('handled!');
+};
+
+ed.addEventListener('my-event', listener);
+
+// should be handled
+ed.dispatchEvent(event);
+
+ed.removeEventListener('my-event', listener);
+
+// should not be handled
+ed.dispatchEvent(event);
+
+```
+
+### Caveat
+Be careful with too many listeners. It can cause memory leaks. Remove them when no longer needed.
