@@ -13,7 +13,7 @@ class Editor extends Component {
       code: message,
       value: undefined,
       error: false,
-      logs: []
+      logs: [],
     };
 
     this.logger = this.logger.bind(this);
@@ -25,7 +25,7 @@ class Editor extends Component {
     //console.log('onChange', newValue, e);
   }
 
-  monacoRed = ref => (this.monacoRef = ref);
+  monacoRed = (ref) => (this.monacoRef = ref);
 
   logger() {
     const args = Array.prototype.slice.call(arguments);
@@ -33,7 +33,7 @@ class Editor extends Component {
     const logs = this.state.logs;
     logs.push(args);
     this.setState({
-      logs
+      logs,
     });
   }
 
@@ -44,21 +44,22 @@ class Editor extends Component {
     //var theInstructions = "alert('Hello World'); var x = 100";
     this.setState(
       {
-        logs: []
+        logs: [],
       },
       () => {
         try {
+          // eslint-disable-next-line no-new-func
           const F = new Function('log', value);
           const output = F(this.logger);
           this.setState({
             value: output,
-            error: false
+            error: false,
           });
         } catch (error) {
           const { message } = error;
           this.setState({
             error: true,
-            value: message
+            value: message,
           });
         }
       }
@@ -70,7 +71,7 @@ class Editor extends Component {
     const { code, logs } = this.state;
     const options = {
       selectOnLineNumbers: true,
-      fontSize: 14
+      fontSize: 14,
     };
     return (
       <Fragment>
