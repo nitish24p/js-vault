@@ -114,6 +114,17 @@ const routes = [
     preload: () => import('./../content/array-listener/array-listener.mdx'),
     longText:
       'Attach a listener to an array which gets triggered when an item is pushed into the array'
+  },
+  {
+    path: '/event-dispatcher',
+    exact: true,
+    main: generateMarkdown(() =>
+      import('./../content/event-dispatcher/event-dispatcher.mdx')
+    ),
+    text: 'Event Dispatcher',
+    preload: () => import('./../content/event-dispatcher/event-dispatcher.mdx'),
+    longText:
+      'Implement a class / function / utility which exhibits an event dispatcher mechanism'
   }
 
   //====================DELETE JUNK BELOW THIS=====================
