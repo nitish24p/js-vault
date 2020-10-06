@@ -1,0 +1,49 @@
+import Editor from './../../components/editor';
+
+## Implement Promise polyfill
+
+[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+
+> The Promise object represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
+
+### Question
+
+Create a class `Promise` with two constructor parameters: `resolve` (fired when the promise is resolved) and `reject` (fired when the promise is rejected).
+This implementation must contain a `then` method (called upon completion) and a `catch` method (called upon failure). The methods must be chainable, that is,
+you can call `catch` right after `then`, or vise-versa, and it will yield the same result. There's no limit on how many `then` or `catch` calls you can chain.
+
+```text
+new Promise(function(resolve, reject) {
+  resolve(5)
+})
+.then(function(results) {
+  console.log(results);
+})
+.catch(function(error) {
+  console.error(error);
+})
+```
+
+### Thought process Pseudocode
+
+1. A good way to start is by defining the Promise interface and it's operations. You can use a class (ES6) or function constructor:
+
+```javascript
+function Promise(callback) {
+  // ...code
+}
+```
+
+2. Consider what should happen if the promise is already _resolved_, that is, the `resolved` function was already called.
+
+<Editor />
+
+### Solution
+
+```javascript
+// TODO: solution...
+```
+
+### Caveat
+
+Both the `then` and `catch` functions return promises, which will call the next `then` or `catch` function that follows in the chain.
