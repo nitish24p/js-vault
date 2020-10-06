@@ -114,6 +114,16 @@ const routes = [
     preload: () => import('./../content/array-listener/array-listener.mdx'),
     longText:
       'Attach a listener to an array which gets triggered when an item is pushed into the array'
+  },
+  {
+    path: '/promisify',
+    exact: true,
+    main: generateMarkdown(() =>
+      import('./../content/promisify/promisify.mdx')
+    ),
+    text: 'Promisify a function',
+    preload: () => import('./../content/promisify/promisify.mdx'),
+    longText: 'Write a method which will implement Promisify'
   }
 
   //====================DELETE JUNK BELOW THIS=====================
