@@ -114,6 +114,17 @@ const routes = [
     preload: () => import('./../content/array-listener/array-listener.mdx'),
     longText:
       'Attach a listener to an array which gets triggered when an item is pushed into the array'
+  },
+  {
+    path: '/iife-example',
+    exact: true,
+    main: generateMarkdown(() =>
+      import('./../content/iife-example/iife-example.mdx')
+    ),
+    text: 'IIFE Example',
+    preload: () => import('./../content/iife-example/iife-example.mdx'),
+    longText:
+      'Explain IIFE with an example'
   }
 
   //====================DELETE JUNK BELOW THIS=====================
