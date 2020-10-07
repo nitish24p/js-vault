@@ -116,15 +116,15 @@ const routes = [
       "Attach a listener to an array which gets triggered when an item is pushed into the array",
   },
   {
-    path: "/function-pipe",
+    path: "/event-dispatcher",
     exact: true,
     main: generateMarkdown(() =>
-      import("./../content/function-pipe/function-pipe.mdx")
+      import("./../content/event-dispatcher/event-dispatcher.mdx")
     ),
-    text: "Function Pipe Implementation",
-    preload: () => import("./../content/function-pipe/function-pipe.mdx"),
+    text: "Event Dispatcher",
+    preload: () => import("./../content/event-dispatcher/event-dispatcher.mdx"),
     longText:
-      "Write a function which will act as a pipe(input of one function is the output of second function and so on...).",
+      "Implement a class / function / utility which exhibits an event dispatcher mechanism",
   },
 
   //====================DELETE JUNK BELOW THIS=====================
