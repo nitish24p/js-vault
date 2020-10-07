@@ -1,0 +1,30 @@
+import Editor from "./../../components/editor";
+
+## Implement pipe()
+
+[pipe()](https://www.freecodecamp.org/news/pipe-and-compose-in-javascript-5b04004ac937/)
+
+> The concept of pipe is simple — it combines n functions. It’s a pipe flowing left-to-right, calling each function with the output of the last one.
+
+### Question
+
+Implement the `pipe()` method
+
+1. Instead of nesting function calls to use output of one function to input to next function, we'll create a pipeline mechanism.
+
+2. Creating a more understandable and readable code.
+
+<Editor />
+
+### Solution
+
+```javascript
+const pipe = (...functions) => (el) => functions.reduce((x, f) => f(x), el);
+
+const double = (x) => x * 2;
+const square = (x) => x * x;
+const cube = (x) => x ** 3;
+
+const value = pipe(double, cube, square)(2); // output 4096
+console.log(value);
+```
