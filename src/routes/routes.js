@@ -126,6 +126,16 @@ const routes = [
     longText:
       "Implement a class / function / utility which exhibits an event dispatcher mechanism",
   },
+  {
+    path: "/function-pipe",
+    exact: true,
+    main: generateMarkdown(() =>
+      import("./../content/function-pipe/function-pipe.mdx")
+    ),
+    text: "Implement pipe()",
+    preload: () => import("./../content/function-pipe/function-pipe.mdx"),
+    longText: "Implement the pipe() function",
+  },
 
   //====================DELETE JUNK BELOW THIS=====================
 ];
