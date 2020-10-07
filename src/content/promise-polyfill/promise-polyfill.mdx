@@ -14,10 +14,13 @@ you can call `catch` right after `then`, or vise-versa, and it will yield the sa
 
 ```text
 new Promise(function(resolve, reject) {
-  resolve(5)
+  setTimeout(function() {
+    resolve('success');
+  }, 1000);
 })
 .then(function(results) {
   console.log(results);
+  throw new Error('This is an error');
 })
 .catch(function(error) {
   console.error(error);
@@ -34,14 +37,68 @@ function Promise(callback) {
 }
 ```
 
-2. Consider what should happen if the promise is already _resolved_, that is, the `resolved` function was already called.
+2. Consider what should happen if the promise is already _resolved_, that is, the `resolved` function was already called, and a new `then`
+   or `catch` condition is appended to the promise.
 
 <Editor />
 
 ### Solution
 
 ```javascript
-// TODO: solution...
+function Promise(callback) {
+  var subscribers = [];
+  var subscriberIndex = 0;
+  var lastValue = undefined;
+  var isFullfilled = false;
+  function process(type) {
+    var currentSubscriber = subscribers[subscriberIndex];
+    while (currentSubscriber && currentSubscriber.type !== type) {
+      subscriberIndex++;
+      currentSubscriber = subscribers[subscriberIndex];
+    }
+
+    if (!currentSubscriber) {
+      return; // No more subscribers.
+    }
+    subscriberIndex++;
+
+    try {
+      lastValue = currentSubscriber.callback(lastValue);
+      process('resolve');
+    } catch (error) {
+      lastValue = error;
+      process('reject');
+    }
+  }
+  function resolve(value) {
+    lastValue = value;
+    isFullfilled = true;
+    process('resolve');
+  }
+  function reject(error) {
+    lastValue = error;
+    isFullfilled = true;
+    process('reject');
+  }
+  this.then = function (thenFn) {
+    subscribers.push({ type: 'resolve', callback: thenFn });
+    if (isFullfilled) {
+      process('resolve');
+    }
+    return this;
+  };
+  this.catch = function (catchFn) {
+    subscribers.push({ type: 'reject', callback: catchFn });
+    if (isFullfilled) {
+      process('reject');
+    }
+    return this;
+  };
+
+  callback(resolve, reject);
+
+  return this;
+}
 ```
 
 ### Caveat
