@@ -47,3 +47,23 @@ my log message
 
 ### Caveat
 You can't use IIFE without parentheses on initialization.
+
+```javascript
+// NON WORKING EXAMPLE
+(function () {
+	console.log('my log');	
+});
+```
+
+You should add parentheses on end of function initialization:
+
+```javascript
+// WORKING EXAMPLE
+(function () {
+	console.log('my log');	
+})();
+  ^
+  |
+  |
+ HERE
+```
