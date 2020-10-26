@@ -125,6 +125,17 @@ const routes = [
     preload: () => import('./../content/event-dispatcher/event-dispatcher.mdx'),
     longText:
       'Implement a class / function / utility which exhibits an event dispatcher mechanism'
+  },
+  {
+    path: '/iife-example',
+    exact: true,
+    main: generateMarkdown(() =>
+      import('./../content/iife-example/iife-example.mdx')
+    ),
+    text: 'IIFE Example',
+    preload: () => import('./../content/iife-example/iife-example.mdx'),
+    longText:
+      'Explain IIFE with an example'
   }
 
   //====================DELETE JUNK BELOW THIS=====================

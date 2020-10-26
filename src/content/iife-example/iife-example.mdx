@@ -1,0 +1,65 @@
+import Editor from './../../components/editor';
+
+## Explain IIFE with an example
+
+
+[IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) 
+
+An IIFE (Immediately Invoked Function Expression) is a JavaScript function that runs as soon as it is defined.
+
+
+### Question
+What is IIFE in Javascript? Hot it works? Write an example.
+
+### Thought process Pseudocode
+1. Write a function to log some message for example
+```javascript
+function foo() {
+  console.log('my log message');
+}
+```
+
+2. For now it's not called. You can call it with name of function and parentheses. Call function and see log message in console
+```javascript
+foo();
+
+/**
+my log message
+**/
+```
+
+3. But also you can call it immediately as IIFE. You need to put your function definition into parentheses and add parentheses to call it. Give a try:
+
+<Editor />
+
+### Solution
+```javascript
+(function foo() {
+  console.log('my log message');
+})();
+
+// or function can be anonymous
+
+(function() {
+    console.log('my log message');
+})();
+``` 
+
+### Caveat
+You can't use IIFE without parentheses on initialization.
+
+```javascript
+// NON WORKING EXAMPLE
+(function () {
+	console.log('my log');	
+});
+```
+
+You should add parentheses on end of function initialization:
+
+```javascript
+// WORKING EXAMPLE
+(function () {
+	console.log('my log');	
+})();
+```
