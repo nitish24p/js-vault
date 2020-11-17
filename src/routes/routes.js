@@ -85,6 +85,16 @@ const routes = [
       'Write a function which will memoize subsequent calls to a function'
   },
   {
+    path: '/promise-polyfilll',
+    exact: true,
+    main: generateMarkdown(() =>
+      import('./../content/promise-polyfill/promise-polyfill.mdx')
+    ),
+    text: 'Implement Promise polyfill',
+    preload: () => import('./../content/promise-polyfill/promise-polyfill.mdx'),
+    longText: 'Create a class that can be used as a Promise'
+  },
+  {
     path: '/promise-all',
     exact: true,
     main: generateMarkdown(() =>
