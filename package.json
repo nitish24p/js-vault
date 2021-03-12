@@ -47,7 +47,7 @@
     "prism-react-renderer": "^0.1.6",
     "react": "^16.8.6",
     "react-app-polyfill": "^0.2.2",
-    "react-dev-utils": "^8.0.0",
+    "react-dev-utils": "^11.0.4",
     "react-dom": "^16.8.6",
     "react-monaco-editor": "^0.25.1",
     "react-router": "^5.0.0",
