@@ -33,7 +33,7 @@ Implement the `Array.filter` method
 Array.prototype.newFilter = function (callback, context) {
   const result = [];
   for (let index = 0; index < this.length; index++) {
-    if (callback.call(context, this[index], index, this)) {
+    if (callback.call(context, this[index], index, this) && this.indexOf(this[index]) > -1) {
       result.push(this[index])
     }
   }
